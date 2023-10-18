@@ -77,11 +77,12 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="pdf_text" sap:VirtualizedContainerService.HintSize="449.6,651.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="pdf_text" sap:VirtualizedContainerService.HintSize="449.6,776.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="outp" />
       <Variable x:TypeArguments="scg:IEnumerable(str:Match)" Name="phn" />
       <Variable x:TypeArguments="x:String" Name="ph" />
+      <Variable x:TypeArguments="scg:IEnumerable(str:Match)" Name="dates" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -91,7 +92,8 @@
     <ui:ReadPDFText PreserveFormatting="{x:Null}" DisplayName="Read PDF Text" FileName="C:\Users\Anitha\Downloads\invoice.pdf" sap:VirtualizedContainerService.HintSize="387.2,83.2" sap2010:WorkflowViewState.IdRef="ReadPDFText_1" Range="All" Text="[ph]" />
     <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="387.2,90.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[ph]" />
     <ui:Matches FirstMatch="{x:Null}" BuilderPattern="[0-9]{10}" DisplayName="Find Matching Patterns" sap:VirtualizedContainerService.HintSize="387.2,60" sap2010:WorkflowViewState.IdRef="Matches_1" Input="[ph]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;[0-9]&quot;,&quot;QuantifierFirstValue&quot;:&quot;10&quot;,&quot;QuantifierID&quot;:&quot;EXT&quot;,&quot;QuantifierName&quot;:&quot;Exactly&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="[0-9]{10}" RegexOption="IgnoreCase, Compiled" Result="[phn]" />
-    <ui:Matches FirstMatch="{x:Null}" Input="{x:Null}" Pattern="{x:Null}" DisplayName="Find Matching Patterns" sap:VirtualizedContainerService.HintSize="387.2,60" sap2010:WorkflowViewState.IdRef="Matches_2" IsBuilderTabModified="False" RegexOption="IgnoreCase, Compiled" />
+    <ui:Matches FirstMatch="{x:Null}" BuilderPattern="[0-9]{2}[-][A-Z]{3}[-][0-9]{2}?" DisplayName="Find Matching Patterns" sap:VirtualizedContainerService.HintSize="387.2,60" sap2010:WorkflowViewState.IdRef="Matches_2" Input="[ph]" IsBuilderTabModified="True" Model="[{&quot;Index&quot;:0,&quot;OperationID&quot;:&quot;ADV&quot;,&quot;OperationName&quot;:&quot;Advanced&quot;,&quot;OperationValue&quot;:&quot;[0-9]{2}[-][A-Z]{3}[-][0-9]{2}&quot;,&quot;QuantifierFirstValue&quot;:&quot;?&quot;,&quot;QuantifierID&quot;:&quot;ZOO&quot;,&quot;QuantifierName&quot;:&quot;Zero or one&quot;,&quot;QuantifierSecondValue&quot;:null}]" Pattern="[0-9]{2}[-][A-Z]{3}[-][0-9]{2}?" RegexOption="IgnoreCase, Compiled" Result="[dates]" />
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="387.2,85.6" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[phn(0).Value]" />
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="387.2,85.6" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[dates(0).Value]" />
   </Sequence>
 </Activity>
