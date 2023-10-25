@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="dict" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="746.4,610.4" sap2010:WorkflowViewState.IdRef="dict_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="dict" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="746.4,852" sap2010:WorkflowViewState.IdRef="dict_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -27,6 +27,7 @@
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.Activities.System.Collections</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -73,9 +74,10 @@
       <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="dict" sap:VirtualizedContainerService.HintSize="496,324" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="dict" sap:VirtualizedContainerService.HintSize="496,787.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Int32)" Name="dict" />
+      <Variable x:TypeArguments="x:String" Name="x" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -87,9 +89,20 @@
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Int32)">[dict]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Int32)">[New Dictionary(Of String, Int32) from {{"Jane", 24},{"Joe",35}}]</InArgument>
+        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Int32)">[New Dictionary(Of String, Int32) from {{"Jane", 24},{"Joe",35},{x,y}}]</InArgument>
       </Assign.Value>
     </Assign>
+    <ui:InputDialog Options="{x:Null}" OptionsString="{x:Null}" DisplayName="Input Dialog" sap:VirtualizedContainerService.HintSize="433.6,241.6" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="name" Title="name">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:Object" xml:space="preserve">[x
+x]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
     <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="433.6,90.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[&quot;Dictionary &quot; + dict(&quot;Jane&quot;).ToString]" />
+    <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[dict]" DisplayName="Append Items to Collection" sap:VirtualizedContainerService.HintSize="433.6,141.6" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_1">
+      <uasc:AppendItemToCollection.Items>
+        <scg:List x:TypeArguments="InArgument(x:String)" Capacity="0" />
+      </uasc:AppendItemToCollection.Items>
+    </uasc:AppendItemToCollection>
   </Sequence>
 </Activity>
